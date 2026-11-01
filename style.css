@@ -1,83 +1,142 @@
-/* --- Core Animation Keyframes --- */
 
-/* Smooth fade up and slide layout reveal */
-@keyframes fadeUpReveal {
-  from {
+/* =================================
+   PREMIUM PORTFOLIO ANIMATIONS
+================================= */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Initial hero animation */
+.hero-animation {
+    animation: heroReveal 1.2s ease-out both;
+}
+
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll reveal animation */
+.reveal {
     opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
+    transform: translateY(45px);
+    transition: opacity 0.8s ease,
+                transform 0.8s ease;
+}
+
+.reveal.active {
     opacity: 1;
     transform: translateY(0);
-  }
 }
 
-/* Typing terminal blink effect */
-@keyframes blinkCursor {
-  50% { border-color: transparent; }
+/* Slide from left */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease;
 }
 
-/* --- Scroll Reveal Functional Utility Classes --- */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
-              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  will-change: opacity, transform;
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.reveal-on-scroll.active {
-  opacity: 1;
-  transform: translateY(0);
+/* Slide from right */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s ease;
 }
 
-/* --- Typed Cursor Effect class --- */
-.typing-cursor {
-  border-right: 3px solid #14b8a6; /* teal-500 */
-  animation: blinkCursor 0.75s step-end infinite;
-  white-space: nowrap;
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-/* --- Modern Interactive Hover Layout Upgrades --- */
-
-/* Timeline nodes accent pulsing glow */
-@keyframes timelineNodePulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4); }
-  50% { transform: scale(1.15); box-shadow: 0 0 12px 4px rgba(20, 184, 166, 0.2); }
+/* Professional cards hover */
+.experience-card,
+.project-card,
+.skill-card {
+    transition: transform 0.35s ease,
+                box-shadow 0.35s ease;
 }
 
-.group:hover .absolute.rounded-full {
-  animation: timelineNodePulse 2s infinite ease-in-out;
-  background-color: #10b981 !important; /* switch to vibrant emerald on hover */
+.experience-card:hover,
+.project-card:hover,
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
 }
 
-/* Card lifting shadow enhancements for Enterprise Projects & Skills cards */
-#projects .grid > div, 
-#skills .grid > div {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s ease;
+/* Animated gradient background */
+.animated-gradient {
+    background: linear-gradient(
+        -45deg,
+        #0f172a,
+        #1e3a8a,
+        #312e81,
+        #0f172a
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
 }
 
-#projects .grid > div:hover,
-#skills .grid > div:hover {
-  transform: translateY(-5px);
-  border-color: rgba(20, 184, 166, 0.4); /* subtle teal outline border activation */
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 
-              0 0 15px 1px rgba(20, 184, 166, 0.1);
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* --- High Performance Minimalist Scrollbar --- */
-::-webkit-scrollbar {
-  width: 8px;
+/* Floating animation */
+.floating {
+    animation: floating 4s ease-in-out infinite;
 }
-::-webkit-scrollbar-track {
-  background: #0f172a;
+
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
 }
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+
+/* Animated underline */
+nav a {
+    position: relative;
+    text-decoration: none;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #14b8a6;
+
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #38bdf8;
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
