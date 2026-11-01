@@ -1,19 +1,41 @@
 
-/* =================================
-   PREMIUM PORTFOLIO ANIMATIONS
-================================= */
+<style>
+/* ===== PREMIUM PORTFOLIO ANIMATION ===== */
 
-/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
-/* Initial hero animation */
-.hero-animation {
-    animation: heroReveal 1.2s ease-out both;
+body {
+    overflow-x: hidden;
 }
 
-@keyframes heroReveal {
+/* Header entrance */
+header {
+    animation: headerDrop 0.8s ease both;
+}
+
+@keyframes headerDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero entrance */
+#about > div:first-child {
+    animation: heroEntry 1s ease-out both;
+}
+
+#about > div:last-child {
+    animation: heroImageEntry 1.2s ease-out both;
+}
+
+@keyframes heroEntry {
     from {
         opacity: 0;
         transform: translateY(35px);
@@ -24,119 +46,139 @@ html {
     }
 }
 
-/* Scroll reveal animation */
-.reveal {
+@keyframes heroImageEntry {
+    from {
+        opacity: 0;
+        transform: translateX(40px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Name gradient effect */
+#about h1 {
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #5eead4,
+        #34d399,
+        #ffffff
+    );
+    background-size: 250% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: nameGlow 5s linear infinite;
+}
+
+@keyframes nameGlow {
+    to {
+        background-position: 250% center;
+    }
+}
+
+/* Scroll reveal */
+.scroll-reveal {
     opacity: 0;
     transform: translateY(45px);
     transition: opacity 0.8s ease,
                 transform 0.8s ease;
 }
 
-.reveal.active {
+.scroll-reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Slide from left */
-.reveal-left {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: all 0.8s ease;
+/* Experience timeline */
+#experience .relative.pl-10.group {
+    transition: transform 0.4s ease;
 }
 
-.reveal-left.active {
-    opacity: 1;
-    transform: translateX(0);
+#experience .relative.pl-10.group:hover {
+    transform: translateX(8px);
 }
 
-/* Slide from right */
-.reveal-right {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: all 0.8s ease;
+/* Timeline dots */
+#experience .relative.pl-10.group > div:first-child {
+    transition: box-shadow 0.4s ease,
+                background 0.4s ease;
 }
 
-.reveal-right.active {
-    opacity: 1;
-    transform: translateX(0);
+#experience .relative.pl-10.group:hover > div:first-child {
+    box-shadow: 0 0 15px #2dd4bf;
 }
 
-/* Professional cards hover */
-.experience-card,
-.project-card,
-.skill-card {
-    transition: transform 0.35s ease,
-                box-shadow 0.35s ease;
+/* Project cards */
+#projects .grid > div {
+    transition: transform 0.4s ease,
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
 }
 
-.experience-card:hover,
-.project-card:hover,
-.skill-card:hover {
+#projects .grid > div:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    border-color: #2dd4bf;
+    box-shadow: 0 12px 30px rgba(45, 212, 191, 0.12);
 }
 
-/* Animated gradient background */
-.animated-gradient {
-    background: linear-gradient(
-        -45deg,
-        #0f172a,
-        #1e3a8a,
-        #312e81,
-        #0f172a
-    );
-    background-size: 400% 400%;
-    animation: gradientMove 12s ease infinite;
+/* Section heading underline */
+section h2 span {
+    position: relative;
 }
 
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+section h2 span::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    margin-top: 5px;
+    background: #2dd4bf;
+    transition: width 0.5s ease;
 }
 
-/* Floating animation */
-.floating {
-    animation: floating 4s ease-in-out infinite;
+section h2:hover span::after {
+    width: 100%;
 }
 
-@keyframes floating {
+/* Profile image glow */
+#about .relative.group {
+    animation: profileFloat 4s ease-in-out infinite;
+}
+
+@keyframes profileFloat {
     0%, 100% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-12px);
+        transform: translateY(-10px);
     }
 }
 
-/* Animated underline */
+/* Navigation hover */
 nav a {
-    position: relative;
-    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-nav a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background: #38bdf8;
-    transition: width 0.3s ease;
+nav a:hover {
+    text-shadow: 0 0 12px rgba(45, 212, 191, 0.5);
 }
 
-nav a:hover::after {
-    width: 100%;
-}
-
-/* Accessibility */
+/* Mobile and accessibility */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+        animation: none !important;
+        transition: none !important;
         scroll-behavior: auto !important;
     }
+
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
 }
+</style>

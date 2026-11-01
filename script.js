@@ -1,52 +1,47 @@
 
-document.addEventListener("DOMContentLoaded", () => {
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-    // Select portfolio sections and cards
-    const elements = document.querySelectorAll(
-        "section, main article, .experience-card, " +
-        ".project-card, .skill-card, .section-title"
-    );
+    // Select existing portfolio elements
+    const animatedElements = document.querySelectorAll(`
+        main > section:not(#about),
+        #experience .relative.pl-10.group,
+        #projects .grid > div
+    `);
 
-    // Add reveal animation
-    elements.forEach((element, index) => {
-        if (!element.classList.contains("reveal")) {
-            element.classList.add("reveal");
-        }
+    // Add animation classes
+    animatedElements.forEach((element, index) => {
+        element.classList.add("scroll-reveal");
 
-        // Slightly stagger the animation
+        // Stagger individual card animations
         element.style.transitionDelay =
-            `${(index % 4) * 100}ms`;
+            `${(index % 3) * 120}ms`;
     });
 
-    // Intersection Observer
+    // Observe elements during scrolling
     const observer = new IntersectionObserver(
-        (entries, observer) => {
+        function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add("active");
+                    entry.target.classList.add("visible");
                     observer.unobserve(entry.target);
                 }
             });
         },
         {
-            threshold: 0.12
+            threshold: 0.15,
+            rootMargin: "0px 0px -40px 0px"
         }
     );
 
-    elements.forEach(element => {
+    animatedElements.forEach(element => {
         observer.observe(element);
     });
 
-    // Hero animation
-    const hero = document.querySelector("h1");
-
-    if (hero) {
-        hero.classList.add("hero-animation");
-    }
-
     // Smooth navigation
     document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener("click", function(event) {
+        link.addEventListener("click", function (event) {
+
             const target = document.querySelector(
                 this.getAttribute("href")
             );
@@ -63,3 +58,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+</script>
