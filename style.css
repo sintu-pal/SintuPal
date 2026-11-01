@@ -1,55 +1,83 @@
-/* Custom Portfolio Enhancements */
+/* --- Core Animation Keyframes --- */
 
-/* Enable butter-smooth transitions when clicking nav links */
-html {
-  scroll-behavior: smooth;
+/* Smooth fade up and slide layout reveal */
+@keyframes fadeUpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Custom, sleek modern dark-theme scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Typing terminal blink effect */
+@keyframes blinkCursor {
+  50% { border-color: transparent; }
 }
 
-::-webkit-scrollbar-track {
-  background: #0f172a; /* matches slate-900 */
+/* --- Scroll Reveal Functional Utility Classes --- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #334155; /* matches slate-700 */
-  border-radius: 9999px;
+.reveal-on-scroll.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #14b8a6; /* accent teal-500 tint on hover */
+/* --- Typed Cursor Effect class --- */
+.typing-cursor {
+  border-right: 3px solid #14b8a6; /* teal-500 */
+  animation: blinkCursor 0.75s step-end infinite;
+  white-space: nowrap;
 }
 
-/* Add a subtle, professional glowing grid effect to the main background */
-body {
-  background-image: 
-    linear-gradient(to right, rgba(51, 65, 85, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(51, 65, 85, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
+/* --- Modern Interactive Hover Layout Upgrades --- */
 
-/* Soft accent animation for timeline nodes in the Experience section */
-@keyframes pulseGlow {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
+/* Timeline nodes accent pulsing glow */
+@keyframes timelineNodePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4); }
+  50% { transform: scale(1.15); box-shadow: 0 0 12px 4px rgba(20, 184, 166, 0.2); }
 }
 
 .group:hover .absolute.rounded-full {
-  animation: pulseGlow 2s infinite ease-in-out;
-  box-shadow: 0 0 12px rgba(20, 184, 166, 0.6); /* teal glow */
+  animation: timelineNodePulse 2s infinite ease-in-out;
+  background-color: #10b981 !important; /* switch to vibrant emerald on hover */
 }
 
-/* Micro-interactions for Project Cards */
-#projects .bg-slate-800\/50 {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Card lifting shadow enhancements for Enterprise Projects & Skills cards */
+#projects .grid > div, 
+#skills .grid > div {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
 }
 
-#projects .bg-slate-800\/50:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 
-              0 8px 10px -6px rgba(20, 184, 166, 0.1);
+#projects .grid > div:hover,
+#skills .grid > div:hover {
+  transform: translateY(-5px);
+  border-color: rgba(20, 184, 166, 0.4); /* subtle teal outline border activation */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 
+              0 0 15px 1px rgba(20, 184, 166, 0.1);
+}
+
+/* --- High Performance Minimalist Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #14b8a6;
 }
