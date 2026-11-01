@@ -1,0 +1,55 @@
+/* Custom Portfolio Enhancements */
+
+/* Enable butter-smooth transitions when clicking nav links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom, sleek modern dark-theme scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a; /* matches slate-900 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155; /* matches slate-700 */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #14b8a6; /* accent teal-500 tint on hover */
+}
+
+/* Add a subtle, professional glowing grid effect to the main background */
+body {
+  background-image: 
+    linear-gradient(to right, rgba(51, 65, 85, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(51, 65, 85, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Soft accent animation for timeline nodes in the Experience section */
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.group:hover .absolute.rounded-full {
+  animation: pulseGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.6); /* teal glow */
+}
+
+/* Micro-interactions for Project Cards */
+#projects .bg-slate-800\/50 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#projects .bg-slate-800\/50:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 
+              0 8px 10px -6px rgba(20, 184, 166, 0.1);
+}
